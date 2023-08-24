@@ -1,4 +1,4 @@
-import { drawImage } from "./javascript/canvas.js";
+import { drawImage, expandCanvasForEditing } from "./javascript/canvas.js";
 import { readLocalFile, loadImage } from "./javascript/loadImage.js";
 
 const localImage = document.querySelector(".local-image-input");
@@ -13,4 +13,5 @@ localImage.addEventListener("change", async function (event) {
   const imageData = await readLocalFile(event);
   const image = await loadImage(imageData);
   drawImage(image);
+  expandCanvasForEditing();
 });
