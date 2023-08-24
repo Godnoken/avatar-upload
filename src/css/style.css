@@ -1,3 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100vh; /* Fallback */
+  height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  font-size: 1.6rem;
+  background: linear-gradient(
+    -45deg,
+    rgb(216, 216, 216),
+    rgb(226, 183, 183),
+    rgb(216, 216, 216),
+    rgb(226, 183, 183)
+  );
+  background-size: 2000%;
+  animation: backgroundGradient 50s ease infinite;
+}
+
 main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 5% 0;
+}
+
+.avatar-upload-container {
+  height: 100%;
+  width: 75%;
   display: grid;
+  grid-template-rows: 75% 25%;
+}
+
+.canvas-container {
+  align-self: center;
+  justify-self: center;
+  position: relative;
+  height: 40rem;
+  width: 40rem;
+}
+
+.avatar-canvas {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.opacity-canvas {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.avatar-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes backgroundGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }

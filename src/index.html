@@ -10,7 +10,7 @@
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <link href="css/style.css" rel="stylesheet" />
-    <script src="index.js" type="module" defer></script>
+    <script src="./index.js" type="module" defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" async></script>
     <meta charset="UTF-8" />
     <meta
@@ -21,8 +21,15 @@
   </head>
   <body>
     <main>
-      <div></div>
-      <div></div>
+      <div class="avatar-upload-container">
+        <div class="canvas-container">
+          <canvas class="avatar-canvas"></canvas>
+          <canvas class="opacity-canvas"></canvas>
+        </div>
+        <div class="avatar-buttons-container">
+          <input type="file" class="local-image-input" accept="image/*" />
+        </div>
+      </div>
     </main>
   </body>
 </html>
