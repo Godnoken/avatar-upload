@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <title>Avatar Upload</title>
-    <link href="https://www.gstatic.com" rel="preconnect" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
     <link
       href="css/normalize.css"
       rel="preload"
@@ -25,6 +30,9 @@
         <div class="canvas-container">
           <canvas class="avatar-canvas"></canvas>
           <canvas class="opacity-canvas"></canvas>
+        </div>
+        <div class="status-container">
+          <p class="status"></p>
         </div>
         <div class="avatar-buttons-container">
           <input type="file" class="local-image-input" accept="image/*" />

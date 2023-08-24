@@ -1,7 +1,22 @@
 import { drawImage, expandCanvasForEditing } from "./javascript/canvas.js";
-import { readLocalFile, loadImage } from "./javascript/loadImage.js";
+import {
+  readLocalFile,
+  loadImage,
+  isPng,
+  is512x512,
+} from "./javascript/image.js";
+import {
+  initText,
+  controlsText,
+  wrongFormatText,
+} from "./javascript/status.js";
 
 const localImage = document.querySelector(".local-image-input");
+const status = document.querySelector(".status");
+
+window.onload = () => {
+  status.innerText = initText;
+};
 
 // Fix mobile browser resizing
 window.addEventListener("resize", () => {
@@ -12,6 +27,12 @@ window.addEventListener("resize", () => {
 localImage.addEventListener("change", async function (event) {
   const imageData = await readLocalFile(event);
   const image = await loadImage(imageData);
-  drawImage(image);
-  expandCanvasForEditing();
+
+  if (isPng() && is512x512()) {
+    drawImage(image);
+    expandCanvasForEditing();
+    status.innerText = controlsText;
+  } else {
+    status.innerText = wrongFormatText;
+  }
 });

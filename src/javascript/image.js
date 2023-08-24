@@ -16,3 +16,11 @@ export function loadImage(imageData) {
     image.onerror = () => reject("Failed to load image");
   });
 }
+
+export function isPng() {
+  return true;
+}
+
+export function is512x512() {
+  return true;
+}

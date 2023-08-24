@@ -7,6 +7,7 @@ html {
   height: 100vh; /* Fallback */
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -35,7 +36,7 @@ main {
   height: 100%;
   width: 75%;
   display: grid;
-  grid-template-rows: 75% 25%;
+  grid-template-rows: 70% 15% 15%;
 }
 
 .canvas-container {
@@ -66,6 +67,22 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.status-container {
+  min-width: 50%;
+  min-height: 5rem;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid rgb(255, 239, 239);
+  border-bottom: 2px solid rgb(255, 239, 239);
+}
+
+.status {
+  margin: 2rem 0;
 }
 
 @keyframes backgroundGradient {

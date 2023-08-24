@@ -1,8 +1,12 @@
+import { controlsText, successText } from "./status.js";
+
 const avatarCanvas = document.querySelector(".avatar-canvas");
 const opacityCanvas = document.querySelector(".opacity-canvas");
 const canvasContainer = document.querySelector(".canvas-container");
 const avatarContext = avatarCanvas.getContext("2d");
 const opacityContext = opacityCanvas.getContext("2d");
+
+const status = document.querySelector(".status");
 
 // Make sure canvases actual size is the same as the CSS canvas (avoids oval circle)
 avatarCanvas.width = canvasContainer.offsetWidth;
@@ -23,8 +27,10 @@ opacityCanvas.addEventListener("mousemove", (event) => {
 canvasContainer.addEventListener("click", () => {
   if (canvasContainer.style.animationName === "shrinkCanvas") {
     expandCanvasForEditing();
+    status.innerText = controlsText;
   } else {
     shrinkCanvasForResult();
+    status.innerText = successText;
   }
 });
 
