@@ -4,7 +4,6 @@ const canvasContainer = document.querySelector(".canvas-container");
 const avatarContext = avatarCanvas.getContext("2d");
 const opacityContext = opacityCanvas.getContext("2d");
 const localImage = document.querySelector(".local-image-input");
-const img = new Image();
 
 // Make sure canvases actual size is the same as the CSS canvas (avoids oval circle)
 avatarCanvas.width = canvasContainer.offsetWidth;
@@ -19,6 +18,36 @@ let lastY = opacityCanvas.height / 2;
 opacityCanvas.addEventListener("mousemove", (event) => {
   revealImage(event);
 });
+
+localImage.addEventListener("change", async function (event) {
+  const imageData = await readLocalFile(event);
+  const image = await loadImage(imageData);
+  drawImage(image);
+});
+
+function readLocalFile(event) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject("Failed to upload image");
+    reader.readAsDataURL(event.target.files[0]);
+  });
+}
+
+function loadImage(imageData) {
+  let image = new Image();
+  image.src = imageData;
+
+  return new Promise((resolve, reject) => {
+    image.onload = () => resolve(image);
+    image.onerror = () => reject("Failed to load image");
+  });
+}
+
+function drawImage(image) {
+  avatarContext.clearRect(0, 0, avatarCanvas.width, avatarCanvas.height);
+  avatarContext.drawImage(image, 0, 0, avatarCanvas.width, avatarCanvas.height);
+}
 
 function revealImage(event) {
   const rect = opacityCanvas.getBoundingClientRect();
