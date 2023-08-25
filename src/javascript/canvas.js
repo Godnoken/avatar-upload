@@ -105,10 +105,10 @@ function revealImage(event) {
     circleRadius,
     lastX,
     lastY,
-    circleRadius + 1000 // Adjust the shadow size
+    circleRadius + 350 // Adjust the shadow size
   );
-  gradient.addColorStop(0, "rgba(0, 0, 0, 0.8)");
-  gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+  gradient.addColorStop(0, "rgba(0, 0, 0, 0.9)");
+  gradient.addColorStop(1, "rgba(0, 0, 0, 0.7)");
   opacityContext.globalCompositeOperation = "source-over";
   opacityContext.fillStyle = gradient;
   opacityContext.fillRect(0, 0, opacityCanvas.width, opacityCanvas.height);
