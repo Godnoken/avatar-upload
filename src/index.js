@@ -2,19 +2,24 @@ import { drawImage, expandCanvasForEditing } from "./javascript/canvas.js";
 import {
   readLocalFile,
   loadImage,
+  convertExpectedFormatAndSize,
   isPng,
   is512x512,
-  convertFormat,
 } from "./javascript/image.js";
 import {
   initText,
   controlsText,
   wrongFormatText,
+  unexpectedError,
 } from "./javascript/status.js";
 
 const localImage = document.querySelector(".local-image-input");
 const status = document.querySelector(".status");
 const canvasContainer = document.querySelector(".canvas-container");
+const convertButton = document.querySelector(".convert-button");
+
+export let image = new Image();
+export let isAcceptableImage = false;
 
 window.onload = () => {
   status.innerText = initText;
@@ -26,12 +31,12 @@ window.addEventListener("resize", () => {
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 });
 
-localImage.addEventListener("change", async function (event) {
+localImage.addEventListener("change", async (event) => {
   let imageData = await readLocalFile(event);
-  let image = await loadImage(imageData);
-  [image, imageData] = await convertFormat(image);
+  image = await loadImage(imageData);
 
-  if (isPng(imageData)) {
+  if (isPng(imageData) && is512x512(image)) {
+    isAcceptableImage = true;
     if (canvasContainer.style.animationName === "shrinkCanvas") {
       expandCanvasForEditing();
     }
@@ -40,5 +45,24 @@ localImage.addEventListener("change", async function (event) {
     status.innerText = controlsText;
   } else {
     status.innerText = wrongFormatText;
+    isAcceptableImage = false;
+  }
+});
+
+convertButton.addEventListener("click", async () => {
+  let imageData;
+  [image, imageData] = await convertExpectedFormatAndSize(image);
+
+  if (isPng(imageData) && is512x512(image)) {
+    isAcceptableImage = true;
+    if (canvasContainer.style.animationName === "shrinkCanvas") {
+      expandCanvasForEditing();
+    }
+    drawImage(image);
+
+    status.innerText = controlsText;
+  } else {
+    status.innerText = unexpectedError;
+    isAcceptableImage = false;
   }
 });

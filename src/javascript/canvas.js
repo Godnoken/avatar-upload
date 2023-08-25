@@ -1,5 +1,5 @@
 import { controlsText, successText } from "./status.js";
-import { image } from "./image.js";
+import { image, isAcceptableImage } from "../index.js";
 
 const avatarCanvas = document.querySelector(".avatar-canvas");
 const opacityCanvas = document.querySelector(".opacity-canvas");
@@ -33,7 +33,7 @@ let lastX = opacityCanvas.width / 2;
 let lastY = opacityCanvas.height / 2;
 
 opacityCanvas.addEventListener("mousemove", (event) => {
-  if (image.src.length > 0) {
+  if (isAcceptableImage) {
     revealImage(event);
   }
 });
@@ -43,7 +43,7 @@ canvasContainer.addEventListener("click", () => {
     expandCanvasForEditing();
     drawImage(image);
     status.innerText = controlsText;
-  } else if (image.src.length > 0) {
+  } else if (isAcceptableImage) {
     shrinkCanvasForResult();
     clipImage();
     status.innerText = successText;

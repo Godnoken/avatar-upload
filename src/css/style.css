@@ -91,6 +91,11 @@ main {
   align-items: center;
 }
 
+.convert-button {
+  width: 20%;
+  height: 20%;
+}
+
 @keyframes backgroundGradient {
   0% {
     background-position: 0% 0%;

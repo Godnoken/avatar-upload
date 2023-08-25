@@ -1,5 +1,3 @@
-export let image = new Image();
-
 export function readLocalFile(event) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -12,6 +10,7 @@ export function readLocalFile(event) {
 }
 
 export function loadImage(imageData) {
+  let image = new Image();
   image.src = imageData;
 
   return new Promise((resolve, reject) => {
@@ -24,20 +23,19 @@ export function isPng(imageData) {
   return imageData.startsWith("data:image/png");
 }
 
-export function is512x512() {
+export function is512x512(image) {
   return image.width === 512 && image.height === 512 ? true : false;
 }
 
-export async function convertFormat(image) {
+export async function convertExpectedFormatAndSize(image) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
-  canvas.width = image.width;
-  canvas.height = image.height;
+  canvas.width = 512;
+  canvas.height = 512;
+  context.drawImage(image, 0, 0, 512, 512);
 
-  context.drawImage(image, 0, 0);
-
-  let newImageData = canvas.toDataURL("image/png");
+  const newImageData = canvas.toDataURL("image/png");
 
   return [await loadImage(newImageData), newImageData];
 }
