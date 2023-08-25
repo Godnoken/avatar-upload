@@ -46,6 +46,7 @@ opacityCanvas.addEventListener("touchmove", (event) => {
   }
 });
 
+// Shrink or expand depending on user actively editing or not
 canvasContainer.addEventListener("click", () => {
   if (canvasContainer.style.animationName === "shrinkCanvas") {
     expandCanvasForEditing();
