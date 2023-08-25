@@ -39,6 +39,8 @@ opacityCanvas.addEventListener("mousemove", (event) => {
 });
 
 opacityCanvas.addEventListener("touchmove", (event) => {
+  event.preventDefault();
+
   if (isAcceptableImage) {
     revealImage(event);
   }
