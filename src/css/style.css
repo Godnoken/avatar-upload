@@ -34,7 +34,7 @@ main {
 
 .avatar-upload-container {
   height: 100%;
-  width: 75%;
+  width: 100%;
   display: grid;
   grid-template-rows: 70% 15% 15%;
   justify-content: center;
@@ -74,7 +74,7 @@ main {
 }
 
 .status-container {
-  min-width: 50%;
+  width: 80rem;
   min-height: 5rem;
   display: flex;
   align-self: center;
@@ -93,9 +93,11 @@ main {
 }
 
 .avatar-buttons-container {
+  width: 75rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  justify-self: center;
 }
 
 .convert-button {

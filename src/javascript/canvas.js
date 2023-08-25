@@ -38,6 +38,12 @@ opacityCanvas.addEventListener("mousemove", (event) => {
   }
 });
 
+opacityCanvas.addEventListener("touchmove", (event) => {
+  if (isAcceptableImage) {
+    revealImage(event);
+  }
+});
+
 canvasContainer.addEventListener("click", () => {
   if (canvasContainer.style.animationName === "shrinkCanvas") {
     expandCanvasForEditing();
