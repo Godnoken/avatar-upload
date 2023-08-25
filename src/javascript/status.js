@@ -1,4 +1,4 @@
-export const initText = "Please upload a local or online image below.";
+export const initText = "Please upload an image below.";
 export const controlsText =
   "Left click on the image to confirm your desired avatar.";
 export const wrongFormatText =
