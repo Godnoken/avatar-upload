@@ -33,7 +33,7 @@ let lastX = opacityCanvas.width / 2;
 let lastY = opacityCanvas.height / 2;
 
 opacityCanvas.addEventListener("mousemove", (event) => {
-  if (canvasContainer.style.animationName === "expandCanvas") {
+  if (image.src.length > 0) {
     revealImage(event);
   }
 });
@@ -43,7 +43,7 @@ canvasContainer.addEventListener("click", () => {
     expandCanvasForEditing();
     drawImage(image);
     status.innerText = controlsText;
-  } else if (canvasContainer.style.animationName === "expandCanvas") {
+  } else if (image.src.length > 0) {
     shrinkCanvasForResult();
     clipImage();
     status.innerText = successText;
@@ -63,7 +63,13 @@ function clipImage() {
 
   temporaryContext.putImageData(imageData, 0, 0);
 
-  avatarContext.drawImage(temporaryCanvas, 0, 0, 400, 400);
+  avatarContext.drawImage(
+    temporaryCanvas,
+    0,
+    0,
+    avatarCanvas.width * 2,
+    avatarCanvas.height * 2
+  );
 
   temporaryContext.clearRect(
     0,
@@ -130,13 +136,11 @@ export function expandCanvasForEditing() {
 }
 
 export function shrinkCanvasForResult() {
-  if (canvasContainer.style.animationName === "expandCanvas") {
-    canvasContainer.style.animation = "";
-    canvasContainer.offsetHeight;
-    canvasContainer.style.animation = "shrinkCanvas 0.5s forwards ease-in-out";
-    avatarCanvas.style.animation = "";
-    avatarCanvas.offsetHeight;
-    avatarCanvas.style.animation = "shrinkCanvas 0.5s forwards ease-in-out";
-    opacityCanvas.style.visibility = "hidden";
-  }
+  canvasContainer.style.animation = "";
+  canvasContainer.offsetHeight;
+  canvasContainer.style.animation = "shrinkCanvas 0.5s forwards ease-in-out";
+  avatarCanvas.style.animation = "";
+  avatarCanvas.offsetHeight;
+  avatarCanvas.style.animation = "shrinkCanvas 0.5s forwards ease-in-out";
+  opacityCanvas.style.visibility = "hidden";
 }

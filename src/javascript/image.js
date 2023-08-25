@@ -1,11 +1,9 @@
-let URL = "";
 export let image = new Image();
 
 export function readLocalFile(event) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
-      URL = reader.result;
       resolve(reader.result);
     };
     reader.onerror = () => reject("Failed to upload image");
@@ -22,10 +20,24 @@ export function loadImage(imageData) {
   });
 }
 
-export function isPng() {
-  return URL.startsWith("data:image/png");
+export function isPng(imageData) {
+  return imageData.startsWith("data:image/png");
 }
 
 export function is512x512() {
   return image.width === 512 && image.height === 512 ? true : false;
+}
+
+export async function convertFormat(image) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  canvas.width = image.width;
+  canvas.height = image.height;
+
+  context.drawImage(image, 0, 0);
+
+  let newImageData = canvas.toDataURL("image/png");
+
+  return [await loadImage(newImageData), newImageData];
 }

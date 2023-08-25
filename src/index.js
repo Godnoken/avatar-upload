@@ -4,6 +4,7 @@ import {
   loadImage,
   isPng,
   is512x512,
+  convertFormat,
 } from "./javascript/image.js";
 import {
   initText,
@@ -13,6 +14,7 @@ import {
 
 const localImage = document.querySelector(".local-image-input");
 const status = document.querySelector(".status");
+const canvasContainer = document.querySelector(".canvas-container");
 
 window.onload = () => {
   status.innerText = initText;
@@ -25,12 +27,16 @@ window.addEventListener("resize", () => {
 });
 
 localImage.addEventListener("change", async function (event) {
-  const imageData = await readLocalFile(event);
-  const image = await loadImage(imageData);
+  let imageData = await readLocalFile(event);
+  let image = await loadImage(imageData);
+  [image, imageData] = await convertFormat(image);
 
-  if (isPng() && is512x512()) {
+  if (isPng(imageData)) {
+    if (canvasContainer.style.animationName === "shrinkCanvas") {
+      expandCanvasForEditing();
+    }
     drawImage(image);
-    expandCanvasForEditing();
+
     status.innerText = controlsText;
   } else {
     status.innerText = wrongFormatText;
