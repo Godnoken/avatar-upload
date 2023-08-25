@@ -53,6 +53,7 @@ main {
   cursor: pointer;
   border-radius: 0.5rem;
   user-select: none;
+  touch-action: none;
 }
 
 .avatar-canvas {
@@ -60,6 +61,8 @@ main {
   height: 100%;
   width: 100%;
   border-radius: 0.5rem;
+  user-select: none;
+  touch-action: none;
 }
 
 .opacity-canvas {
@@ -67,12 +70,16 @@ main {
   height: 100%;
   width: 100%;
   border-radius: 0.5rem;
+  user-select: none;
+  touch-action: none;
 }
 
 .temporary-canvas {
   position: absolute;
   height: 100%;
   width: 100%;
+  user-select: none;
+  touch-action: none;
 }
 
 .status-container {
