@@ -1,20 +1,34 @@
 import { controlsText, successText } from "./status.js";
+import { image } from "./image.js";
 
 const avatarCanvas = document.querySelector(".avatar-canvas");
 const opacityCanvas = document.querySelector(".opacity-canvas");
+const temporaryCanvas = document.querySelector(".temporary-canvas");
 const canvasContainer = document.querySelector(".canvas-container");
 const avatarContext = avatarCanvas.getContext("2d");
 const opacityContext = opacityCanvas.getContext("2d");
+const temporaryContext = temporaryCanvas.getContext("2d");
 
 const status = document.querySelector(".status");
 
-// Make sure canvases actual size is the same as the CSS canvas (avoids oval circle)
+const avatarSize = {
+  width: canvasContainer.offsetWidth,
+  height: canvasContainer.offsetHeight,
+};
+
+// Make sure canvases HTML and CSS canvas are the same (avoids oval circle)
 avatarCanvas.width = canvasContainer.offsetWidth;
 avatarCanvas.height = canvasContainer.offsetHeight;
 opacityCanvas.width = canvasContainer.offsetWidth;
 opacityCanvas.height = canvasContainer.offsetHeight;
+temporaryCanvas.width = canvasContainer.offsetWidth;
+temporaryCanvas.height = canvasContainer.offsetHeight;
 
-let circleRadius = canvasContainer.offsetWidth / 4;
+// Make sure users can not choose dimensions smaller than the minimum size of the avatar
+let circleRadius = Math.max(
+  avatarSize.width / 4,
+  canvasContainer.offsetWidth / 10
+);
 let lastX = opacityCanvas.width / 2;
 let lastY = opacityCanvas.height / 2;
 
@@ -27,12 +41,37 @@ opacityCanvas.addEventListener("mousemove", (event) => {
 canvasContainer.addEventListener("click", () => {
   if (canvasContainer.style.animationName === "shrinkCanvas") {
     expandCanvasForEditing();
+    drawImage(image);
     status.innerText = controlsText;
   } else {
     shrinkCanvasForResult();
+    clipImage();
     status.innerText = successText;
   }
 });
+
+// Copies user's chosen image dimensions and draws it out on the canvas
+function clipImage() {
+  let imageData = avatarContext.getImageData(
+    lastX - circleRadius,
+    lastY - circleRadius,
+    circleRadius * 2,
+    circleRadius * 2
+  );
+
+  avatarContext.clearRect(0, 0, avatarCanvas.width, avatarCanvas.height);
+
+  temporaryContext.putImageData(imageData, 0, 0);
+
+  avatarContext.drawImage(temporaryCanvas, 0, 0, 400, 400);
+
+  temporaryContext.clearRect(
+    0,
+    0,
+    temporaryCanvas.width,
+    temporaryCanvas.height
+  );
+}
 
 function revealImage(event) {
   const rect = opacityCanvas.getBoundingClientRect();

@@ -1,5 +1,5 @@
 let URL = "";
-let image = new Image();
+export let image = new Image();
 
 export function readLocalFile(event) {
   return new Promise((resolve, reject) => {

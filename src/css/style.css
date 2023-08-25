@@ -63,6 +63,12 @@ main {
   width: 100%;
 }
 
+.temporary-canvas {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
 .avatar-buttons-container {
   display: flex;
   justify-content: center;
