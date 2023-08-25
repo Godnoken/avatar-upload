@@ -9,3 +9,5 @@
 - No support for large screens
 
 - Minimal support for mobile layout
+
+- Little to no error handling
