@@ -37,6 +37,7 @@ main {
   width: 75%;
   display: grid;
   grid-template-rows: 70% 15% 15%;
+  justify-content: center;
 }
 
 .canvas-container {
@@ -82,6 +83,7 @@ main {
   align-items: center;
   border-top: 2px solid rgb(255, 239, 239);
   border-bottom: 2px solid rgb(255, 239, 239);
+  text-align: center;
   user-select: none;
 }
 
@@ -147,6 +149,20 @@ main {
 .disabled {
   pointer-events: none;
   opacity: 0.5;
+}
+
+@media (max-width: 800px) {
+  html {
+    font-size: 40%;
+  }
+
+  .canvas-container {
+    transform: scale(0.8);
+  }
+
+  .avatar-buttons-container {
+    flex-direction: column;
+  }
 }
 
 @keyframes backgroundGradient {
