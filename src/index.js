@@ -13,7 +13,7 @@ import {
   unexpectedError,
 } from "./javascript/status.js";
 
-const localImage = document.querySelector(".local-image-input");
+const uploadButton = document.querySelector(".upload-button");
 const status = document.querySelector(".status");
 const canvasContainer = document.querySelector(".canvas-container");
 const convertButton = document.querySelector(".convert-button");
@@ -23,6 +23,7 @@ export let isAcceptableImage = false;
 
 window.onload = () => {
   status.innerText = initText;
+  changeConvertButtonVisiblity(false);
 };
 
 // Fix mobile browser resizing
@@ -31,7 +32,7 @@ window.addEventListener("resize", () => {
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 });
 
-localImage.addEventListener("change", async (event) => {
+uploadButton.addEventListener("change", async (event) => {
   let imageData = await readLocalFile(event);
   image = await loadImage(imageData);
 
@@ -41,9 +42,12 @@ localImage.addEventListener("change", async (event) => {
       expandCanvasForEditing();
     }
     drawImage(image);
+    changeConvertButtonVisiblity(false);
 
     status.innerText = controlsText;
   } else {
+    changeConvertButtonVisiblity(true);
+
     status.innerText = wrongFormatText;
     isAcceptableImage = false;
   }
@@ -59,10 +63,22 @@ convertButton.addEventListener("click", async () => {
       expandCanvasForEditing();
     }
     drawImage(image);
+    changeConvertButtonVisiblity(false);
 
     status.innerText = controlsText;
   } else {
+    changeConvertButtonVisiblity(true);
+
     status.innerText = unexpectedError;
     isAcceptableImage = false;
   }
 });
+
+function changeConvertButtonVisiblity(visible) {
+  let convertButton = document.querySelector(".convert-button");
+  if (visible) {
+    convertButton.classList.remove("disabled");
+  } else {
+    convertButton.classList.add("disabled");
+  }
+}
