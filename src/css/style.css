@@ -69,12 +69,6 @@ main {
   width: 100%;
 }
 
-.avatar-buttons-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .status-container {
   min-width: 50%;
   min-height: 5rem;
@@ -85,10 +79,17 @@ main {
   align-items: center;
   border-top: 2px solid rgb(255, 239, 239);
   border-bottom: 2px solid rgb(255, 239, 239);
+  user-select: none;
 }
 
 .status {
   margin: 2rem 0;
+}
+
+.avatar-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes backgroundGradient {

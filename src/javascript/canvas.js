@@ -43,7 +43,7 @@ canvasContainer.addEventListener("click", () => {
     expandCanvasForEditing();
     drawImage(image);
     status.innerText = controlsText;
-  } else {
+  } else if (canvasContainer.style.animationName === "expandCanvas") {
     shrinkCanvasForResult();
     clipImage();
     status.innerText = successText;
