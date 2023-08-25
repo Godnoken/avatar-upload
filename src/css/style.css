@@ -156,6 +156,10 @@ main {
     font-size: 40%;
   }
 
+  .avatar-upload-container {
+    grid-template-rows: 50% 10% 20% 20%;
+  }
+
   .canvas-container {
     transform: scale(0.8);
   }
