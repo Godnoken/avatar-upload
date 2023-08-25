@@ -38,6 +38,7 @@ main {
   display: grid;
   grid-template-rows: 70% 15% 15%;
   justify-content: center;
+  overflow: hidden;
 }
 
 .canvas-container {
@@ -165,6 +166,10 @@ main {
 
   .canvas-container {
     transform: scale(0.8);
+  }
+
+  .status-container {
+    width: 40rem;
   }
 
   .avatar-buttons-container {
